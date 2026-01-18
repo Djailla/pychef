@@ -8,8 +8,7 @@ import threading
 import urllib
 import weakref
 
-import pkg_resources
-
+import packaging.version
 import requests
 
 from chef.auth import sign_request
@@ -68,7 +67,7 @@ class ChefAPI(object):
         self.timeout = timeout
         self.version = version
         self.headers = dict((k.lower(), v) for k, v in headers.items())
-        self.version_parsed = pkg_resources.parse_version(self.version)
+        self.version_parsed = packaging.version.parse(self.version)
         self.platform = self.parsed_url.hostname == 'api.opscode.com'
         self.ssl_verify = ssl_verify
         if not api_stack_value():
