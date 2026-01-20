@@ -1,6 +1,6 @@
 import collections
 
-import pkg_resources
+import packaging.version
 from chef.acl import Acl
 
 from chef.api import ChefAPI
@@ -32,7 +32,7 @@ class ChefObjectMeta(type):
         super(ChefObjectMeta, cls).__init__(name, bases, d)
         if name != 'ChefObject':
             ChefObject.types[name.lower()] = cls
-        cls.api_version_parsed = pkg_resources.parse_version(cls.api_version)
+        cls.api_version_parsed = packaging.version.parse(cls.api_version)
 
 
 class ChefObject(metaclass=ChefObjectMeta):
