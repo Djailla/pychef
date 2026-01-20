@@ -193,7 +193,7 @@ class ChefAPI(object):
     def request(self, method, path, headers={}, data=None):
         auth_headers = sign_request(key=self.key, http_method=method,
             path=self.parsed_url.path+path.split('?', 1)[0], body=data,
-            host=self.parsed_url.netloc, timestamp=datetime.datetime.utcnow(),
+            host=self.parsed_url.netloc, timestamp=datetime.datetime.now(datetime.timezone.utc),
             user_id=self.client)
         request_headers = {}
         request_headers.update(self.headers)
